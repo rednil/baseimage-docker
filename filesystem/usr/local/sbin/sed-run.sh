@@ -14,7 +14,9 @@ set -e
 
 for name in $(find / -type f -name *.docker-run.sed)
 do
-	echo "sed-run: applying changes from file $name"
+	echo "sed-run: Changing to directory $(dirname $name)"
+        cd $(dirname $name)
+        echo "sed-run: applying changes from file $(basename $name)"
 	# substitute variables, write result into temporary file
 	# from http://stackoverflow.com/questions/415677/how-to-replace-placeholders-in-a-text-file
 	eval "echo \"$(< $name)\"" > $name.tmp
